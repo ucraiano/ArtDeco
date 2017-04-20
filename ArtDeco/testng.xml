@@ -4,6 +4,8 @@
     <test name="Any Name">
         <classes>
             <class name="Tests.Login_tests" />
+            <class name="Tests.FB_login_with_exist_email"></class>
+            <class name="Tests.FB_login_correct"></class>
         </classes>
     </test>
 </suite>
