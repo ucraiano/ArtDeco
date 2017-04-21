@@ -23,12 +23,15 @@ public class Main {
     By first_visit_alert_close = By.xpath(".//*[@id='first-visit']/div/div/button");
     By successfully_logIN_and_logOUT_alert = By.xpath("//main/div[4]");
     By close_successfully_login_alert = By.xpath("//main/div[4]/button[1]");
-    public Main(WebDriver driver){this.driver = driver;}
+    public Main(WebDriver driver){
+        this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, 10);
+    }
+
 
     // Determine actions with elements
 
     public void setFirst_visit_alert_close(){
-        wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(first_visit_alert_close));
         driver.findElement(first_visit_alert_close).click();
     }

@@ -31,6 +31,7 @@ Facebook obj_Facebook;
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 }
 
+
 @Test(priority = 1)
     public void test_empty_fields() throws InterruptedException {
         obj_Main.setFirst_visit_alert_close();
