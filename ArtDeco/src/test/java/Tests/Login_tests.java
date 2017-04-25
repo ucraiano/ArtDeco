@@ -23,18 +23,19 @@ Facebook obj_Facebook;
 
 @BeforeTest
     public void set_up(){
-    driver = new FirefoxDriver();
-    obj_Main = new Main(driver);
-    obj_SignIn = new SignIn(driver);
-    obj_Facebook = new Facebook(driver);
-    driver.get("https://www.artdecobeauty.com");
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver = new FirefoxDriver();
+        obj_Main = new Main(driver);
+        obj_SignIn = new SignIn(driver);
+        obj_Facebook = new Facebook(driver);
+        driver.get("https://www.artdecobeauty.com");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 }
 
 
 @Test(priority = 1)
     public void test_empty_fields() throws InterruptedException {
         obj_Main.setFirst_visit_alert_close();
+        obj_Main.setWait();
         obj_Main.setAccount_button();
         obj_SignIn.setEmail_field("");
         obj_SignIn.setPassword_field("");
@@ -72,8 +73,41 @@ Facebook obj_Facebook;
         obj_SignIn.setClose_allert_incorect_login();
 }
 
-
 @Test(priority = 5)
+    public void test_correct_email_with_one_space_in_the_beginning(){
+        obj_SignIn.setEmail_field(" ucraiano.test1@gmail.com");
+        obj_SignIn.setPassword_field("REM4)nexuses");
+        obj_SignIn.setSign_IN_button();
+        Assert.assertTrue(obj_SignIn.is_it_signIN_page().toLowerCase().contains("sign in"));
+        Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
+}
+@Test(priority = 6)
+    public void test_correct_email_with_one_space_in_the_end(){
+        obj_SignIn.setEmail_field("ucraiano.test1@gmail.com ");
+        obj_SignIn.setPassword_field("REM4)nexuses");
+        obj_SignIn.setSign_IN_button();
+        Assert.assertTrue(obj_SignIn.is_it_signIN_page().toLowerCase().contains("sign in"));
+        Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
+}
+
+@Test(priority = 7)
+    public void password_with_one_space_in_the_beginning(){
+        obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
+        obj_SignIn.setPassword_field(" REM4)nexuses");
+        obj_SignIn.setSign_IN_button();
+        Assert.assertTrue(obj_SignIn.is_it_signIN_page().toLowerCase().contains("sign in"));
+        Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
+}
+
+@Test(priority = 8)
+    public void password_with_one_space_in_the_end(){
+        obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
+        obj_SignIn.setPassword_field("REM4)nexuses ");
+        obj_SignIn.setSign_IN_button();
+        Assert.assertTrue(obj_SignIn.is_it_signIN_page().toLowerCase().contains("sign in"));
+        Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
+}
+@Test(priority = 9)
     public void test_correct_email_and_password(){
         obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
         obj_SignIn.setPassword_field("REM4)nexuses");
