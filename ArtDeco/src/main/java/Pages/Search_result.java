@@ -1,5 +1,6 @@
 package Pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,6 +13,7 @@ import static com.sun.tools.doclint.Entity.or;
 public class Search_result {
     WebDriver driver;
     WebDriverWait wait;
+
 
     By title_search_results = By.xpath("//h1[@class=\"page-title\"]");
     By title_not_found = By.xpath("//h6[@class=\"search-results-title\"]");
@@ -28,6 +30,7 @@ public class Search_result {
     public Search_result(WebDriver driver){
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
+
     }
 
     // Determine actions

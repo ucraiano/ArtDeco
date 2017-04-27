@@ -1,6 +1,7 @@
 package Tests;
 
 import Pages.*;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -10,7 +11,6 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.sun.tools.doclint.Entity.or;
 
 
 /**
@@ -28,6 +28,7 @@ public class Search_tests {
         obj_Search_result = new Search_result(driver);
         driver.get("https://www.artdecobeauty.com/");
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
     }
 
     @Test(priority = 1)
