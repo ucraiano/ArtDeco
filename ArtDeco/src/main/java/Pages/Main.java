@@ -50,7 +50,7 @@ public class Main {
     }
 
     public void setWait()throws InterruptedException{
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
     }
 

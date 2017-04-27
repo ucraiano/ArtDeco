@@ -34,6 +34,7 @@ public class FB_login_with_exist_email {
     @Test(priority = 1)
     public void test_facebook_with_email_which_already_exist_in_artdeco() throws InterruptedException {
         obj_Main.setFirst_visit_alert_close();
+        obj_Main.setWait();
         obj_Main.setAccount_button();
         obj_SignIn.setFacebook();
         obj_Facebook.setEmail_field("ucraiano.test1@gmail.com");

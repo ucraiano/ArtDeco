@@ -27,7 +27,7 @@ public class Search_tests {
         obj_Main = new Main(driver);
         obj_Search_result = new Search_result(driver);
         driver.get("https://www.artdecobeauty.com/");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
     @Test(priority = 1)
@@ -59,6 +59,7 @@ public class Search_tests {
     }
 
     @Test(priority = 3)
+    // Test doesn't work if focus is not on the browser window !!!!!
     public void test_previous_query_hint_presents_after_search_open(){
         obj_Main.setSearch_open();
         Assert.assertTrue(obj_Main.is_search_all_results_for_present().toLowerCase().contains("show all results for \"sun kissed bronzing set\""));
@@ -86,7 +87,8 @@ public class Search_tests {
     @Test(priority = 5)
     public void test_open_close_search_input(){
         obj_Main.setSearch_open();
-        Assert.assertTrue(obj_Main.is_search_all_results_for_present().toLowerCase().contains("show all results for \"bronzing set\""));
+        obj_Main.setSearch_input("sasa");
+        Assert.assertTrue(obj_Main.is_search_all_results_for_present().toLowerCase().contains("show all results for \"sasa\""));
         obj_Main.setSearch_close();
         Assert.assertTrue(obj_Main.is_navigation_menu_present().toLowerCase().contains("face eyes lips nails skin care accessories kits looks rewards program"));
     }
@@ -100,7 +102,15 @@ public class Search_tests {
         Assert.assertFalse(obj_Search_result.is_title_NOT_FOUND_present().toLowerCase().contains("no products found"));
     }
 
-
+    @Test(priority = 7)
+    public void test_empty_query_from_main_page() throws InterruptedException {
+        obj_Main.setHome();
+        obj_Main.setSearch_open();
+        obj_Main.setWait();
+        obj_Main.setSearch_start();
+        Assert.assertTrue(obj_Search_result.is_title_SEARCH_RESULTS_present().toLowerCase().contains("search results"));
+        Assert.assertFalse(obj_Search_result.is_title_NOT_FOUND_present().toLowerCase().contains("no products found"));
+    }
     @AfterTest
     public void set_down(){
         driver.close();

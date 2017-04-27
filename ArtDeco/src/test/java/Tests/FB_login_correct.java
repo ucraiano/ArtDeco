@@ -34,6 +34,7 @@ public class FB_login_correct {
     @Test
     public void test_sign_in_with_facebook() throws InterruptedException {
         obj_Main.setFirst_visit_alert_close();
+        obj_Main.setWait();
         obj_Main.setAccount_button();
         obj_SignIn.setFacebook();
         obj_Facebook.setEmail_field("ucraiano.test2@gmail.com");
