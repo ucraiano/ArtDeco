@@ -36,7 +36,7 @@ ExtentTest logger;
         obj_Facebook = new Facebook(driver);
         driver.get("https://www.artdecobeauty.com");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LoginReport.html", true);
+        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/LoginReport.html", true);
         extent.addSystemInfo("Host Name","artdecobeauty.com");
         extent.addSystemInfo("Environment","Selenium WebDriver > FireFox Driver");
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");

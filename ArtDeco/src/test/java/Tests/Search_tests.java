@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class Search_tests {
     WebDriver driver;
     Main obj_Main;
-    Search_result obj_Search_result;
+    Search_result obj_Search_result; 
     ExtentReports extent;
     ExtentTest logger;
 
@@ -36,7 +36,7 @@ public class Search_tests {
         obj_Search_result = new Search_result(driver);
         driver.get("https://www.artdecobeauty.com/");
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/SearchReport.html", true);
+        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/SearchReport.html", true);
         extent.addSystemInfo("Host Name","artdecobeauty.com");
         extent.addSystemInfo("Environment","Selenium WebDriver > FireFox Driver");
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");
