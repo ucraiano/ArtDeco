@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Regression" >
-    <test name="Independence tests : Login, Search">
+<suite name="Regression">
+    <test name="Check login">
         <classes>
             <class name="Tests.Login_tests" />
             <class name="Tests.FB_login_with_exist_email"></class>
             <class name="Tests.FB_login_correct"></class>
-            <class name="Tests.Search_tests"></class>
+        </classes>
+    </test>
+    <test name="Check search">
+        <classes>
+        <class name="Tests.Search_tests"></class>
         </classes>
     </test>
 </suite>
