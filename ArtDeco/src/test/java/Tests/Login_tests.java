@@ -23,8 +23,6 @@ public class Login_tests {
 WebDriver driver;
 Main obj_Main;
 SignIn obj_SignIn;
-SelectRole obj_Select_Role;
-SignUp obj_SignUp;
 Facebook obj_Facebook;
 ExtentReports extent;
 ExtentTest logger;
@@ -134,7 +132,7 @@ ExtentTest logger;
 @Test(priority = 9)
     public void test_correct_email_and_password(){
         logger = extent.startTest("test_correct_email_and_password");
-        obj_SignIn.setEmail_field("test1@gmail.com"); // changed !!! ucraiano.test1@gmail.com
+        obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
         obj_SignIn.setPassword_field("REM4)nexuses");
         obj_SignIn.setSign_IN_button();
         Assert.assertTrue(obj_Main.is_successfully_logIN_and_logOUT_present().toLowerCase().contains("logged in successfully"));
@@ -146,7 +144,6 @@ ExtentTest logger;
         if(result.getStatus() == ITestResult.FAILURE){
             logger.log(LogStatus.FAIL, "Failed Test Case is : "+result.getName());
             logger.log(LogStatus.FAIL, "Failed with next error : "+ result.getThrowable());
-          //  logger.log(LogStatus.INFO, "Snapshot below: " + logger.addScreenCapture("Users/savchenkoaleksandr/Documents/Саша/Фото/IMG_4283.jpg"));
         }else if (result.getStatus() == ITestResult.SKIP){
             logger.log(LogStatus.SKIP, "Skipped Test Case is :"+result.getName());
         }else {
