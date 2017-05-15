@@ -17,10 +17,10 @@
         <documentTitle>ExtentReports 2.0</documentTitle>
 
         <!-- report name - displayed at top-nav -->
-        <reportName>Login Tests</reportName>
+        <reportName>Chrome /</reportName>
 
         <!-- report headline - displayed at top-nav, after reportHeadline -->
-        <reportHeadline>Automation Report</reportHeadline>
+        <reportHeadline>Login Tests</reportHeadline>
 
         <!-- global date format override -->
         <!-- defaults to yyyy-MM-dd -->
