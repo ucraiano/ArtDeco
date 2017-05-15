@@ -5,13 +5,12 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -27,10 +26,16 @@ Facebook obj_Facebook;
 ExtentReports extent;
 ExtentTest logger;
 
+@Parameters("browser")
+@BeforeClass
+    public void set_up(String browser){
+        if (browser.equalsIgnoreCase("firefox")) {
+            driver = new FirefoxDriver();}
+        else if (browser.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "/Users/savchenkoaleksandr/Documents/Саша/Automation/chromedriver");
+            driver = new ChromeDriver();}
 
-@BeforeTest
-    public void set_up(){
-        driver = new FirefoxDriver();
+//      driver = new FirefoxDriver();
         obj_Main = new Main(driver);
         obj_SignIn = new SignIn(driver);
         obj_Facebook = new Facebook(driver);
@@ -58,7 +63,7 @@ ExtentTest logger;
         obj_SignIn.setClose_allert_incorect_login();
 
 }
-@Test(priority = 2)
+@Test(dependsOnMethods = "test_empty_fields")
     public void test_not_email(){
         logger = extent.startTest("test_not_email");
         obj_SignIn.setEmail_field("asdasd.com");
@@ -69,7 +74,7 @@ ExtentTest logger;
         Assert.assertTrue(obj_SignIn.is_it_signIN_page().toLowerCase().contains("sign in"));
         Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
 }
-@Test(priority = 3)
+@Test(dependsOnMethods = "test_not_email")
     public void test_non_existing_email(){
         logger = extent.startTest("test_non_existing_email");
         obj_SignIn.setEmail_field("123@gmail.com");
@@ -80,7 +85,8 @@ ExtentTest logger;
 
 }
 
-@Test(priority =4)
+@Test(dependsOnMethods = "test_non_existing_email")
+// Chrome WebDriver allow spaces in email field
     public void test_existing_email_and_non_existing_password(){
         logger = extent.startTest("test_existing_email_and_non_existing_password");
         obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
@@ -90,7 +96,7 @@ ExtentTest logger;
         obj_SignIn.setClose_allert_incorect_login();
 }
 
-@Test(priority = 5)
+@Test(dependsOnMethods = "test_existing_email_and_non_existing_password")
     public void test_correct_email_with_one_space_in_the_beginning(){
         logger = extent.startTest("test_correct_email_with_one_space_in_the_beginning");
         obj_SignIn.setEmail_field(" ucraiano.test1@gmail.com");
@@ -100,7 +106,7 @@ ExtentTest logger;
         Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
 
 }
-@Test(priority = 6)
+@Test(dependsOnMethods = "test_correct_email_with_one_space_in_the_beginning")
     public void test_correct_email_with_one_space_in_the_end(){
         logger = extent.startTest("test_correct_email_with_one_space_in_the_end");
         obj_SignIn.setEmail_field("ucraiano.test1@gmail.com ");
@@ -110,7 +116,7 @@ ExtentTest logger;
         Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
 }
 
-@Test(priority = 7)
+@Test(dependsOnMethods = "test_correct_email_with_one_space_in_the_end")
     public void password_with_one_space_in_the_beginning(){
         logger = extent.startTest("password_with_one_space_in_the_beginning");
         obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
@@ -120,7 +126,7 @@ ExtentTest logger;
         Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
 }
 
-@Test(priority = 8)
+@Test(dependsOnMethods = "password_with_one_space_in_the_beginning")
     public void password_with_one_space_in_the_end(){
         logger = extent.startTest("password_with_one_space_in_the_end");
         obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
@@ -129,7 +135,7 @@ ExtentTest logger;
         Assert.assertTrue(obj_SignIn.is_it_signIN_page().toLowerCase().contains("sign in"));
         Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
 }
-@Test(priority = 9)
+@Test(dependsOnMethods = "password_with_one_space_in_the_end")
     public void test_correct_email_and_password(){
         logger = extent.startTest("test_correct_email_and_password");
         obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
@@ -152,7 +158,7 @@ ExtentTest logger;
         extent.endTest(logger);
 }
 
-    @AfterTest
+    @AfterClass
     public void set_down(){
         extent.flush();
         extent.close();

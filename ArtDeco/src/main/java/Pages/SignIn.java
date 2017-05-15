@@ -2,12 +2,14 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Created by savchenkoaleksandr on 4/18/17.
  */
 public class SignIn {
     WebDriver driver;
+
 
     By facebook = By.xpath("//a[@class=\"social-auth uppertext\"]");
     By email_field = By.xpath(".//*[@id='email-field']");
