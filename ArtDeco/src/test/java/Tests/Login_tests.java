@@ -41,11 +41,18 @@ ExtentTest logger;
         obj_Facebook = new Facebook(driver);
         driver.get("https://www.artdecobeauty.com");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/LoginReport.html", true);
+        if (browser.equalsIgnoreCase("firefox")) {
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFoxLoginReport.html", true);
+            extent.addSystemInfo("Environment", "Selenium WebDriver > FireFox Driver");
+            extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/firefox-login-extent-config.xml"));
+        } else if (browser.equalsIgnoreCase("chrome")){
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/ChromeLoginReport.html", true);
+            extent.addSystemInfo("Environment", "Selenium WebDriver > Chrome Driver");
+        extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/chrome-login-extent-config.xml"));
+
+        }
         extent.addSystemInfo("Host Name","artdecobeauty.com");
-        extent.addSystemInfo("Environment","Selenium WebDriver > FireFox Driver");
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");
-        extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/login-extent-config.xml"));
 
 }
 
@@ -151,8 +158,8 @@ ExtentTest logger;
             logger.log(LogStatus.FAIL, "Failed Test Case is : "+result.getName());
             logger.log(LogStatus.FAIL, "Failed with next error : "+ result.getThrowable());
         }else if (result.getStatus() == ITestResult.SKIP){
-            logger.log(LogStatus.SKIP, "Skipped Test Case is :"+result.getName());
-        }else {
+            logger.log(LogStatus.SKIP, "Skipped Test Case is : " + result.getName());
+        }else if (result.getStatus() == ITestResult.SUCCESS){
             logger.log(LogStatus.PASS,"Test Passed");
         }
         extent.endTest(logger);

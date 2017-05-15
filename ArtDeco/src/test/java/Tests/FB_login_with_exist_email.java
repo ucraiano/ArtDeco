@@ -42,8 +42,19 @@ public class FB_login_with_exist_email {
         obj_SignIn = new SignIn(driver);
         driver.get("https://www.artdecobeauty.com");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/LoginReport.html", false);
-        extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/login-extent-config.xml"));
+        if (browser.equalsIgnoreCase("firefox")) {
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFoxLoginReport.html", false);
+            extent.addSystemInfo("Environment", "Selenium WebDriver > FireFox Driver");
+            extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/firefox-login-extent-config.xml"));
+
+        } else if (browser.equalsIgnoreCase("chrome")){
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/ChromeLoginReport.html", false);
+            extent.addSystemInfo("Environment", "Selenium WebDriver > Chrome Driver");
+            extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/chrome-login-extent-config.xml"));
+
+        }
+        extent.addSystemInfo("Host Name","artdecobeauty.com");
+        extent.addSystemInfo("Developed by","Aleksandr Savchenko");
     }
 
     @Test()
