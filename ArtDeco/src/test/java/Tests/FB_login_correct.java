@@ -35,29 +35,26 @@ public class FB_login_correct {
             System.setProperty("webdriver.chrome.driver", "/Users/savchenkoaleksandr/Documents/Саша/Automation/chromedriver");
             driver = new ChromeDriver();}
 
- //     driver = new FirefoxDriver();
         obj_Main = new Main(driver);
         obj_Facebook = new Facebook(driver);
         obj_SignIn = new SignIn(driver);
         driver.get("https://www.artdecobeauty.com");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if (browser.equalsIgnoreCase("firefox")) {
-            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFoxLoginReport.html", false);
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFox/FireFoxLoginReport.html", false);
             extent.addSystemInfo("Environment", "Selenium WebDriver > FireFox Driver");
             extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/firefox-login-extent-config.xml"));
 
         } else if (browser.equalsIgnoreCase("chrome")){
-            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/ChromeLoginReport.html", false);
-
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/Chrome/ChromeLoginReport.html", false);
             extent.addSystemInfo("Environment", "Selenium WebDriver > Chrome Driver");
             extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/chrome-login-extent-config.xml"));
-
         }
         extent.addSystemInfo("Host Name","artdecobeauty.com");
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");
     }
 
-    @Test()
+    @Test(priority = 10)
     public void test_sign_in_with_facebook() throws InterruptedException {
         logger = extent.startTest("test_sign_in_with_facebook");
         obj_Main.setFirst_visit_alert_close();

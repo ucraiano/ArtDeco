@@ -43,12 +43,12 @@ public class FB_login_with_exist_email {
         driver.get("https://www.artdecobeauty.com");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if (browser.equalsIgnoreCase("firefox")) {
-            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFoxLoginReport.html", false);
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFox/FireFoxLoginReport.html", false);
             extent.addSystemInfo("Environment", "Selenium WebDriver > FireFox Driver");
             extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/firefox-login-extent-config.xml"));
 
         } else if (browser.equalsIgnoreCase("chrome")){
-            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/ChromeLoginReport.html", false);
+            extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/Chrome/ChromeLoginReport.html", false);
             extent.addSystemInfo("Environment", "Selenium WebDriver > Chrome Driver");
             extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/chrome-login-extent-config.xml"));
 
@@ -57,7 +57,7 @@ public class FB_login_with_exist_email {
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");
     }
 
-    @Test()
+    @Test(priority = 11)
     public void test_facebook_with_email_which_already_exist_in_artdeco() throws InterruptedException {
         logger = extent.startTest("test_facebook_with_email_which_already_exist_in_artdeco");
         obj_Main.setFirst_visit_alert_close();

@@ -51,12 +51,12 @@ public class Search_tests {
             driver.get("https://www.artdecobeauty.com/");
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             if (browser.equalsIgnoreCase("firefox")) {
-                extent = new ExtentReports(System.getProperty("user.dir") + "/test-reports/FireFoxSearchReport.html", true);
+                extent = new ExtentReports(System.getProperty("user.dir") + "/test-reports/FireFox/FireFoxSearchReport.html", true);
                 extent.addSystemInfo("Environment", "Selenium WebDriver > FireFox Driver");
                 extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-configs/firefox-search-extent-config.xml"));
 
             } else if (browser.equalsIgnoreCase("chrome")){
-                extent = new ExtentReports(System.getProperty("user.dir") + "/test-reports/ChromeSearchReport.html", true);
+                extent = new ExtentReports(System.getProperty("user.dir") + "/test-reports/Chrome/ChromeSearchReport.html", true);
                 extent.addSystemInfo("Environment", "Selenium WebDriver > Chrome Driver");
                 extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-configs/chrome-search-extent-config.xml"));
 
