@@ -5,39 +5,46 @@
         <listener class-name="Stuff.Listener"></listener>
     </listeners>
     <!--
-                    <test name="Firefox login">
-                        <parameter name="browser" value="firefox"/>
-                        <classes>
-                            <class name="Tests.Login_tests" />
-                            <class name="Tests.FB_login_correct"/>
-                            <class name="Tests.FB_login_with_exist_email"/>
+                        <test name="Firefox login">
+                            <parameter name="browser" value="firefox"/>
+                            <classes>
+                                    <class name="Tests.Login_tests" />
+                                      <class name="Tests.FB_login_correct"/>
+                                      <class name="Tests.FB_login_with_exist_email"/>
                         </classes>
                     </test>
 
 
-                       <test name="Chrome login">
-                            <parameter name="browser" value="chrome"/>
-                            <classes>
-                                <class name="Tests.Login_tests" />
-                                <class name="Tests.FB_login_correct"/>
-                                <class name="Tests.FB_login_with_exist_email"/>
-                            </classes>
-                        </test>
-      -->
+                           <test name="Chrome login">
+                                <parameter name="browser" value="chrome"/>
+                                <classes>
+                                    <class name="Tests.Login_tests" />
+                                    <class name="Tests.FB_login_correct"/>
+                                    <class name="Tests.FB_login_with_exist_email"/>
+                                </classes>
+                            </test>
 
 
-                           <test name="Firefox search">
-                               <parameter name="browser" value="firefox"/>
-                               <classes>
-                                   <class name="Tests.Search_tests"/>
-                               </classes>
-                           </test>
-    <!--
-                           <test name="Chrome search">
-                               <parameter name="browser" value="chrome"/>
-                               <classes>
-                                   <class name="Tests.Search_tests"/>
-                               </classes>
-                           </test>
-                -->
+
+                                   <test name="Firefox search">
+                                       <parameter name="browser" value="firefox"/>
+                                       <classes>
+                                           <class name="Tests.Search_tests"/>
+                                       </classes>
+                                   </test>
+
+                                   <test name="Chrome search">
+                                       <parameter name="browser" value="chrome"/>
+                                       <classes>
+                                           <class name="Tests.Search_tests"/>
+                                       </classes>
+                                   </test>
+
+        -->
+    <test name="Firefox Product List">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="Tests.Product_list_tests"/>
+        </classes>
+    </test>
 </suite>

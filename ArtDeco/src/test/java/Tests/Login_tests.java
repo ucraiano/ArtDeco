@@ -156,14 +156,22 @@ String chrome;
         Assert.assertTrue(obj_SignIn.is_facebook_present().toLowerCase().contains("sign in with facebook"));
 }
 @Test(priority = 9)
-    public void test_correct_email_and_password(){
-        logger = extent.startTest("test_correct_email_and_password");
-        obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
-        obj_SignIn.setPassword_field("REM4)nexuses");
-        obj_SignIn.setSign_IN_button();
-        Assert.assertTrue(obj_Main.is_successfully_logIN_and_logOUT_present().toLowerCase().contains("logged in successfully"));
-        obj_Main.setClose_successfully_login_alert();
-        Assert.assertTrue(obj_Main.is_it_my_account_button().toLowerCase().contains("my account"));
+    public void test_correct_email_and_password() {
+    logger = extent.startTest("test_correct_email_and_password");
+    obj_SignIn.setEmail_field("ucraiano.test1@gmail.com");
+    obj_SignIn.setPassword_field("REM4)nexuses");
+    obj_SignIn.setSign_IN_button();
+    Assert.assertTrue(obj_Main.is_successfully_logIN_and_logOUT_present().toLowerCase().contains("logged in successfully"));
+    obj_Main.setClose_successfully_login_alert();
+    Assert.assertTrue(obj_Main.is_it_my_account_button().toLowerCase().contains("my account"));
+}
+@Test(priority = 10)
+    public void test_logOut(){
+    logger = extent.startTest("test_logOut");
+    obj_Main.setMy_account();
+    obj_Main.setLogout_my_account();
+    Assert.assertTrue(obj_Main.is_successfully_logIN_and_logOUT_present().toLowerCase().contains("signed out successfully"));
+    Assert.assertTrue(obj_Main.is_it_signin_button().toLowerCase().contains("sign in"));
 }
 @AfterMethod
     public void getReportResults(ITestResult result){

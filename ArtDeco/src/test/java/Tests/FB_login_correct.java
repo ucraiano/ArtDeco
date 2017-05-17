@@ -54,7 +54,7 @@ public class FB_login_correct {
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");
     }
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void test_sign_in_with_facebook() throws InterruptedException {
         logger = extent.startTest("test_sign_in_with_facebook");
         obj_Main.setFirst_visit_alert_close();
@@ -67,6 +67,15 @@ public class FB_login_correct {
         Assert.assertTrue(obj_Main.is_successfully_logIN_and_logOUT_present().toLowerCase().contains("you are now signed in with your facebook account."));
         obj_Main.setClose_successfully_login_alert();
         Assert.assertTrue(obj_Main.is_it_my_account_button().toLowerCase().contains("my account"));
+    }
+
+    @Test(priority = 12)
+    public void test_logOut_after_FB_login(){
+        logger = extent.startTest("test_logOut_after_FB_login");
+        obj_Main.setMy_account();
+        obj_Main.setLogout_my_account();
+        Assert.assertTrue(obj_Main.is_successfully_logIN_and_logOUT_present().toLowerCase().contains("signed out successfully"));
+        Assert.assertTrue(obj_Main.is_it_signin_button().toLowerCase().contains("sign in"));
     }
 
 

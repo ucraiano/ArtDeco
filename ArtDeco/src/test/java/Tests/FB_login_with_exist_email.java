@@ -57,7 +57,7 @@ public class FB_login_with_exist_email {
         extent.addSystemInfo("Developed by","Aleksandr Savchenko");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 13)
     public void test_facebook_with_email_which_already_exist_in_artdeco() throws InterruptedException {
         logger = extent.startTest("test_facebook_with_email_which_already_exist_in_artdeco");
         obj_Main.setFirst_visit_alert_close();
