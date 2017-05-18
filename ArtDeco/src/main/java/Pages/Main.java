@@ -31,6 +31,13 @@ public class Main {
     By navigation_menu = By.xpath("//ul[@class=\"main-menu clearfix\"]");
     By search_all_results_for = By.xpath("//a[@class=\"tt-header\"]");
     By home = By.xpath("//img[@alt=\"Logo\"]");
+    By face_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/face\"]");
+    By eyes_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/eyes\"]");
+    By lips_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/lips\"]");
+    By nails_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/nails\"]");
+    By skin_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/skin-care\"]");
+    By accessories_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/accessories\"]");
+    By kits_category = By.xpath("//a[@href=\"https://www.artdecobeauty.com/kits\"]");
 
     public Main(WebDriver driver){
         this.driver = driver;
@@ -95,7 +102,29 @@ public class Main {
         driver.findElement(home).click();
     }
 
+    // PRODUCT LIST TEST
 
+    public void setFace_category(){
+        driver.findElement(face_category).click();
+    }
+    public void setEyes_category(){
+        driver.findElement(eyes_category).click();
+    }
+    public void setLips_category(){
+        driver.findElement(lips_category).click();
+    }
+    public void setNails_category(){
+        driver.findElement(nails_category).click();
+    }
+    public void setSkin_category(){
+        driver.findElement(skin_category).click();
+    }
+    public void setAccessories_category(){
+        driver.findElement(accessories_category).click();
+    }
+    public void setKits_category(){
+        driver.findElement(kits_category).click();
+    }
 
 
     // Determine assert methods
@@ -132,5 +161,7 @@ public class Main {
         wait.until(ExpectedConditions.elementToBeClickable(search_all_results_for));
         return driver.findElement(search_all_results_for).getText();
     }
+
+    //PRODUCT LISTS TEST
 
 }

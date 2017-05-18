@@ -42,7 +42,7 @@
 
         -->
     <test name="Firefox Product List">
-        <parameter name="browser" value="firefox"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="Tests.Product_list_tests"/>
         </classes>
