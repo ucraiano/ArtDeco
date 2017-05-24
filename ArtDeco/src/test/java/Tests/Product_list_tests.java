@@ -6,6 +6,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -13,6 +14,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,17 +36,17 @@ ExtentTest logger;
         System.setProperty("webdriver.chrome.driver","/Users/savchenkoaleksandr/Documents/Саша/Automation/chromedriver");
         driver = new ChromeDriver();
     }
-    obj_Main = new Main(driver);
     obj_Product_list_page = new Product_list_page(driver);
+    obj_Main = new Main(driver);
     driver.get("https://www.artdecobeauty.com");
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     if (browser.equalsIgnoreCase("firefox")) {
-        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFox/FireFoxProductList.html", false);
+        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/FireFox/FireFoxProductList.html", true);
         extent.addSystemInfo("Environment", "Selenium WebDriver > FireFox Driver");
         extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/firefox-product-list-extent-config.xml"));
 
     } else if (browser.equalsIgnoreCase("chrome")){
-        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/Chrome/ChromeLProductList.html", false);
+        extent = new ExtentReports(System.getProperty("user.dir")+"/test-reports/Chrome/ChromeLProductList.html", true);
         extent.addSystemInfo("Environment", "Selenium WebDriver > Chrome Driver");
         extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-configs/chrome-product-list-extent-config.xml"));
     }
@@ -53,8 +55,8 @@ ExtentTest logger;
 
 }
     @Test(priority = 1)
-    public void select_category_FACE() throws InterruptedException {
-        logger = extent.startTest("select_category_FACE");
+    public void select_category_FACE_and_check_default_filter_and_sort_values() throws InterruptedException {
+        logger = extent.startTest("select_category_FACE_and_check_default_filter_and_sort_values");
         obj_Main.setFirst_visit_alert_close();
         obj_Main.setWait();
         obj_Main.setFace_category();
@@ -86,66 +88,64 @@ ExtentTest logger;
         Assert.assertTrue(obj_Product_list_page.is_it_correct_filter_value().toLowerCase().contains("face specials"));
         Assert.assertTrue(obj_Product_list_page.is_filtered_products_present().toLowerCase().contains("fixing powder"));
         Assert.assertTrue(obj_Product_list_page.is_filtered_products_present().toLowerCase().contains("fixing spray"));
-
-
-
-    }
-
-    /*
-    @Test(priority = 3)
-    public void select_category_EYES(){
-        logger = extent.startTest("select_category_EYES");
-        obj_Main.setEyes_category();
-        Assert.assertTrue(obj_Product_list_paga.is_it_correct_category().toLowerCase().contains("eyes"));
-    }
-    @Test(priority = 3)
-    public void select_category_LIPS(){
-        logger = extent.startTest("select_category_LIPS");
-        obj_Main.setLips_category();
-        Assert.assertTrue(obj_Product_list_paga.is_it_correct_category().toLowerCase().contains("lips"));
-    }
-    @Test(priority = 4)
-    public void select_category_Nails(){
-        logger = extent.startTest("select_category_Nails");
-        obj_Main.setNails_category();
-        Assert.assertTrue(obj_Product_list_paga.is_it_correct_category().toLowerCase().contains("nails"));
     }
     @Test(priority = 5)
-    public void select_category_SKIN(){
-        logger = extent.startTest("select_category_SKIN");
-        obj_Main.setSkin_category();
-        Assert.assertTrue(obj_Product_list_paga.is_it_correct_category().toLowerCase().contains("skin"));
+    public void test_filter_Foundation(){
+        logger = extent.startTest("test_filter_Foundation");
+        obj_Product_list_page.setFilter_body();
+        obj_Product_list_page.setChose_Foundation_filter();
+        Assert.assertTrue(obj_Product_list_page.is_it_correct_filter_value().toLowerCase().contains("foundation"));
+        Assert.assertTrue(obj_Product_list_page.is_filtered_products_present().toLowerCase().contains("high performance lifting foundation"));
+        Assert.assertTrue(obj_Product_list_page.is_filtered_products_present().toLowerCase().contains("double finish"));
     }
     @Test(priority = 6)
-    public void select_category_ACCESSORIES(){
-        logger = extent.startTest("select_category_ACCESSORIES");
-        obj_Main.setAccessories_category();
-        Assert.assertTrue(obj_Product_list_paga.is_it_correct_category().toLowerCase().contains("accessories"));
+    public void test_filter_Powder(){
+        logger = extent.startTest("test_filter_Powder");
+        obj_Product_list_page.setFilter_body();
+        obj_Product_list_page.setChose_Powder_filter();
+        Assert.assertTrue(obj_Product_list_page.is_it_correct_filter_value().toLowerCase().contains("powder"));
+        Assert.assertTrue(obj_Product_list_page.is_filtered_products_present().toLowerCase().contains("sun kissed bronzing set"));
+        Assert.assertTrue(obj_Product_list_page.is_filtered_products_present().toLowerCase().contains("glow bronzer"));
     }
     @Test(priority = 7)
-    public void select_category_KITS(){
-        logger = extent.startTest("select_category_KITS");
-        obj_Main.setKits_category();
-        Assert.assertTrue(obj_Product_list_paga.is_it_KITS_category().toLowerCase().contains("kits"));
-    }
-/*
-    @Test
-    public void test_filter(){
-        logger = extent.startTest("test_filter");
-
+    public void test_sort_by_Newest() throws Exception {
+        logger = extent.startTest("test_sort_by_Newest");
+        obj_Product_list_page.setSort_by_body();
+        obj_Product_list_page.setChoose_sort_by_Newest();
+        Assert.assertTrue(obj_Product_list_page.is_first_product_correct().toLowerCase().contains("glow bronzer"));
 
     }
-    @Test
-    public void test_sort_by(){
-        logger = extent.startTest("test_sort_by");
+
+    @Test(priority = 8)
+    public void test_sort_by_Best_Sellers(){
+        logger = extent.startTest("test_sort_by_Best_Sellers");
+        obj_Product_list_page.setSort_by_body();
+        obj_Product_list_page.setChoose_sort_by_BestSellers();
+        Assert.assertTrue(obj_Product_list_page.is_first_product_correct().toLowerCase().contains("sun kissed bronzing set"));
+    }
+    @Test(priority = 9)
+    public void test_sort_by_Price_High_Low(){
+        logger = extent.startTest("test_sort_by_Price_High_Low");
+        obj_Product_list_page.setSort_by_body();
+        obj_Product_list_page.setChoose_sort_by_Price_High_Low();
+        //obj_Product_list_page.is_first_price_is_highest();
+        Assert.assertTrue(obj_Product_list_page.is_first_product_price_highest());
+    }
+    @Test(priority = 10)
+    public void test_sort_by_Price_Low_High(){
+        logger = extent.startTest("test_sort_by_Price_Low_High");
+        obj_Product_list_page.setSort_by_body();
+        obj_Product_list_page.setChoose_sort_by_Price_Low_High();
+        Assert.assertTrue(obj_Product_list_page.is_first_product_price_lowest());
+    }
+    @Test(priority = 11)
+    public void test_sort_by_name_A_Z(){
+        logger = extent.startTest("test_sort_by_name_A_Z");
+        obj_Product_list_page.setSort_by_body();
+        obj_Product_list_page.setChoose_sort_by_A_Z();
+        obj_Product_list_page.is_first_product_name_starts_with_A();
 
     }
-    @Test
-    public void test_show_all_show_18_per_page(){
-        logger = extent.startTest("test_show_all_show_18_per_page");
-
-    }
-    */
 
     @AfterMethod
     public void getReportResults(ITestResult result){

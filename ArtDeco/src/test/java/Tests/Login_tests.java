@@ -38,8 +38,6 @@ String chrome;
             driver = new ChromeDriver();
             chrome = "chrome";
         }
-
-//      driver = new FirefoxDriver();
         obj_Main = new Main(driver);
         obj_SignIn = new SignIn(driver);
         obj_Facebook = new Facebook(driver);

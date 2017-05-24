@@ -40,11 +40,12 @@
                                        </classes>
                                    </test>
 
-        -->
+     -->
     <test name="Firefox Product List">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="Tests.Product_list_tests"/>
         </classes>
     </test>
+
 </suite>
