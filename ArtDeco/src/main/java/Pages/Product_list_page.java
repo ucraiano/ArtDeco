@@ -1,14 +1,12 @@
 package Pages;
 
-import com.relevantcodes.extentreports.model.ExceptionInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import sun.jvm.hotspot.oops.Array;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -139,59 +137,91 @@ public class Product_list_page {
         return true;
     }
 
-    public boolean is_first_product_price_lowest(){
+    public boolean is_first_product_price_lowest() {
         List<WebElement> webElements = driver.findElements(all_products_prices);
         double first_price = Double.parseDouble(webElements.get(0).getText().substring(1));
         for (WebElement element : webElements) {
             Double val = Double.parseDouble(element.getText().substring(1));
             System.out.println(val);
-            if (first_price >val) {
+            if (first_price > val) {
                 return false;
             }
         }
         return true;
     }
 
-    public void is_first_product_name_starts_with_A() {
-        List<WebElement> webElements_sorted_by_web = driver.findElements(all_products_names);
+    public boolean is_sort_A_Z_correct() {
         List<WebElement> webElements = driver.findElements(all_products_names);
+
+        String[] name_array = new String[webElements.size()];
+
         for (int i = 0; i < webElements.size(); i++) {
-            ArrayList<String> array_names = null;
             String name = webElements.get(i).getText();
-
-            for (int x =0; x< webElements.size(); x++){
-                array_names.add(name);
-                System.out.println();
-            }
+            name_array[i] = name;
         }
-        for (int i =0; i < webElements_sorted_by_web.size(); i++){
-            ArrayList<String> array_names_sorted_by_web = null;
-            String name_sorted_by_web = webElements_sorted_by_web.get(i).getText();
-            for(int x = 0; x < webElements_sorted_by_web.size(); x++){
-                array_names_sorted_by_web.add(name_sorted_by_web);
-            }
-        }
+        String[] sorted = new String[webElements.size()];
 
-        }
-
-
-
-
-        /* String first_name = webElements.get(0).getText().toLowerCase();
-        String last_name = webElements.get(9).getText().toLowerCase();
-        for (int i =1; i <webElements.size(); i++){
+        for (int i = 0; i < webElements.size(); i++) {
             String name = webElements.get(i).getText();
-            System.out.println("Name "+ i +" is "+name);
+            sorted[i] = name;
         }
-        if (first_name.startsWith("a") & last_name.startsWith("s")){
+
+        Collections.sort( Arrays.asList(sorted), String.CASE_INSENSITIVE_ORDER );
+
+        for (String s: name_array){
+            System.out.println(s);
+        }
+        System.out.println("");
+        for (String s : sorted) {
+            System.out.println(s);
+        }
+
+        if (Arrays.equals(sorted, name_array)) {
             return true;
-        }else {
+        } else {
             return false;
         }
 
-*/
+    }
+
+
+
+    public boolean is_sort_Z_A_correct() {
+        List<WebElement> webElements = driver.findElements(all_products_names);
+
+        String[] name_array = new String[webElements.size()];
+
+        for (int i = 0; i < webElements.size(); i++) {        // для каждого
+            String name = webElements.get(i).getText();   // получили имя
+            name_array[i] = name;                         // впихнули в массив "name_array"
+        }
+        String[] sorted = new String[webElements.size()];
+
+        for (int i = 0; i < webElements.size(); i++) {
+            String name = webElements.get(i).getText();
+            sorted[i] = name;
+        }
+
+        //Collections.reverse( Arrays.asList(sorted) );
+
+        for (String s:name_array){
+            System.out.println(s);
+        }
+        System.out.println("");
+
+        for (String s : sorted) {
+            System.out.println(s);
+        }
+
+        if (Arrays.equals(name_array, sorted)) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
+
+}
 
 
 

@@ -137,15 +137,30 @@ ExtentTest logger;
         obj_Product_list_page.setSort_by_body();
         obj_Product_list_page.setChoose_sort_by_Price_Low_High();
         Assert.assertTrue(obj_Product_list_page.is_first_product_price_lowest());
+
     }
+
     @Test(priority = 11)
     public void test_sort_by_name_A_Z(){
         logger = extent.startTest("test_sort_by_name_A_Z");
         obj_Product_list_page.setSort_by_body();
         obj_Product_list_page.setChoose_sort_by_A_Z();
-        obj_Product_list_page.is_first_product_name_starts_with_A();
+        Assert.assertTrue(obj_Product_list_page.is_sort_A_Z_correct());
+    }
+
+
+
+    @Test(priority = 12)
+    public void test_sort_by_name_Z_A(){
+        logger = extent.startTest("test_sort_by_name_Z_A");
+        obj_Product_list_page.setSort_by_body();
+        obj_Product_list_page.setChoose_sort_by_Z_A();
+        Assert.assertTrue(obj_Product_list_page.is_sort_Z_A_correct());
 
     }
+
+
+
 
     @AfterMethod
     public void getReportResults(ITestResult result){
